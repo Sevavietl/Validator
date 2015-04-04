@@ -1,0 +1,22 @@
+<phpunit bootstrap="bootstrap.php">
+    <testsuites>
+        <testsuite name="FormElements">
+            <directory>tests/FormElements/</directory>
+        </testsuite>
+    </testsuites>
+    <testsuites>
+        <testsuite name="Forms">
+            <directory>tests/Forms/</directory>
+        </testsuite>
+    </testsuites>
+    <testsuites>
+        <testsuite name="Validators">
+            <directory>tests/Validators/</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+        </whitelist>
+    </filter>
+</phpunit>
