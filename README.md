@@ -13,7 +13,7 @@ Using Abstract classes other types of forms and validators can be derived.
 
 Package was written keeping in mind PSR.
 
-##Examples
+##Examples:
 
 ###1. Create simple form for registration
 
