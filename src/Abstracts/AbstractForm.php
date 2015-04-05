@@ -64,7 +64,11 @@ abstract class AbstractForm
         if ($words[0] == 'add' && $words[1] == 'input') {
             if (isset($words[2]) && !is_null($words[2])) {
                 if (in_array($words[2], $this->inputTypes)) {
-                    return $this->addInput($words[2], $args[0]);
+                    return $this->addInput(
+                        $words[2],
+                        $args[0],
+                        isset($args[1]) ? $args[1] : null
+                    );
                 }
             }
         }
@@ -131,7 +135,7 @@ abstract class AbstractForm
     {
         $this->validator->setInputs($this->elements);
 
-        return $this->validator->fails();
+        return !$this->validator->fails();
     }
 
     abstract public function __toString();

@@ -47,6 +47,7 @@ abstract class AbstractValidator
         }
 
         $message = $this->messages_patterns[$rule];
+
         return vsprintf($message, array_merge([$attribute], $parameters ?: []));
     }
 
@@ -72,7 +73,7 @@ abstract class AbstractValidator
     protected function parseRules($rules)
     {
         if (is_array($rules)) {
-            return $rules;
+            return [$rules];
         }
 
         return explode('|', $rules);
@@ -88,6 +89,13 @@ abstract class AbstractValidator
      */
     protected function parseRule($rule)
     {
+        if (is_array($rule)) {
+            return [
+                array_keys($rule)[0],
+                [array_values($rule)[0]]
+            ];
+        }
+
         if (strpos($rule, ':') !== false) {
             $count = substr_count($rule, ':');
             $rule = explode(':', $rule);

@@ -380,7 +380,7 @@ class BootstrapFormTest extends PHPUnit_Framework_TestCase
         ]);
         $this->form->addInputPassword([
             'name' => 'password',
-            'value' => 'quux',
+            'value' => 'quuuux',
         ]);
 
         $rules = [

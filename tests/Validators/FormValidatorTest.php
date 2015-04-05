@@ -189,7 +189,7 @@ class FormValidatorTest extends PHPUnit_Framework_TestCase
             ]))->defineType('email'),
             (new Input([
                 'name' => 'password',
-                'value' => 'quux'
+                'value' => 'quuuux'
             ]))->defineType('password'),
         ];
         $inputs2 = [
@@ -211,8 +211,8 @@ class FormValidatorTest extends PHPUnit_Framework_TestCase
         }
 
         // Assert
-        $this->assertTrue($act1);
-        $this->assertFalse($act2);
+        $this->assertFalse($act1);
+        $this->assertTrue($act2);
     }
 
     /**
@@ -283,12 +283,14 @@ class FormValidatorTest extends PHPUnit_Framework_TestCase
     {
         // Arrange
         $rules = [
-            'required',
-            'email'
+            'required' => '',
+            'email' => '',
         ];
         $expectedRules = [
-            'required',
-            'email'
+            [
+                'required' => '',
+                'email' => '',
+            ]
         ];
 
         // Act
@@ -308,7 +310,7 @@ class FormValidatorTest extends PHPUnit_Framework_TestCase
     public function testParseRule()
     {
         // Arrange
-        $rule1 = 'min:3';
+        $rule1 = ['min' => 3];
         $rule2 = 'between:1:2';
         $rule3 = 'regex:<.*?>';
 

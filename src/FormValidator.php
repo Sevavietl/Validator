@@ -17,7 +17,7 @@ class FormValidator extends AbstractValidator
         $fails = false;
 
         foreach ($this->inputs as $input) {
-            if ($this->validate($input)) {
+            if (!$this->validate($input)) {
                 $fails = true;
             }
         }
