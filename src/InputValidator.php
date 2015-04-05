@@ -15,7 +15,7 @@ class InputValidator extends AbstractValidator
     {
         $fails = false;
         foreach ($this->inputs as $name => $value) {
-            if ($this->validate([$name, $value])) {
+            if (!$this->validate([$name, $value])) {
                 $fails = true;
             }
         }
