@@ -24,6 +24,13 @@ abstract class AbstractValidator
         'regex' => '%s not matches regex "%s"',
     ];
 
+    /**
+     * Inputs setter
+     *
+     * @param mixed $inputs
+     *
+     * @return object
+     */
     public function setInputs(&$inputs)
     {
         $this->inputs = $inputs;
@@ -38,8 +45,23 @@ abstract class AbstractValidator
      */
     abstract public function fails();
 
+    /**
+     * Validate given input
+     *
+     * @param  mixed $input
+     * @return boolean
+     */
     abstract public function validate($input);
 
+    /**
+     * Compose error message
+     *
+     * @param string $rule
+     * @param string $attribute
+     * @param array $parameters
+     *
+     * @return string
+     */
     protected function composeMessage($rule, $attribute, $parameters = null)
     {
         if (!array_key_exists($rule, $this->messages_patterns)) {
@@ -51,9 +73,18 @@ abstract class AbstractValidator
         return vsprintf($message, array_merge([$attribute], $parameters ?: []));
     }
 
+    /**
+     * Rules setter
+     *
+     * @param array $rules
+     *
+     * @return object
+     */
     public function setRules(array $rules)
     {
         $this->rules = $rules;
+
+        return $this;
     }
 
     /**
@@ -69,6 +100,8 @@ abstract class AbstractValidator
     /**
      * Parse rules, exploding by '|'
      * @param mixed $rules
+     *
+     * @return array
      */
     protected function parseRules($rules)
     {
@@ -135,11 +168,11 @@ abstract class AbstractValidator
     }
 
     /**
-    * Validate that an attribute is a boolean.
-    *
-    * @param  mixed   $value
-    * @return bool
-    */
+     * Validate that an attribute is a boolean.
+     *
+     * @param  mixed   $value
+     * @return bool
+     */
     protected function validateBoolean($value)
     {
         $acceptable = array(true, false, 0, 1, '0', '1');
@@ -148,34 +181,34 @@ abstract class AbstractValidator
     }
 
     /**
-    * Validate that an attribute is numeric.
-    *
-    * @param  mixed   $value
-    * @return bool
-    */
+     * Validate that an attribute is numeric.
+     *
+     * @param  mixed   $value
+     * @return bool
+     */
     protected function validateNumeric($value)
     {
         return is_numeric($value);
     }
 
     /**
-    * Validate that an attribute is an integer.
-    *
-    * @param  mixed   $value
-    * @return bool
-    */
+     * Validate that an attribute is an integer.
+     *
+     * @param  mixed   $value
+     * @return bool
+     */
     protected function validateInteger($value)
     {
         return filter_var($value, FILTER_VALIDATE_INT) !== false;
     }
 
     /**
-    * Validate the size of an attribute is between a set of values.
-    *
-    * @param  mixed   $value
-    * @param  array   $parameters
-    * @return bool
-    */
+     * Validate the size of an attribute is between a set of values.
+     *
+     * @param  mixed   $value
+     * @param  array   $parameters
+     * @return bool
+     */
     protected function validateBetween($value, $parameters)
     {
         $size = $this->getSize($value);
@@ -184,35 +217,35 @@ abstract class AbstractValidator
     }
 
     /**
-    * Validate the size of an attribute is greater than a minimum value.
-    *
-    * @param  mixed   $value
-    * @param  array   $parameters
-    * @return bool
-    */
+     * Validate the size of an attribute is greater than a minimum value.
+     *
+     * @param  mixed   $value
+     * @param  array   $parameters
+     * @return bool
+     */
     protected function validateMin($value, $parameters)
     {
         return $this->getSize($value) >= $parameters[0];
     }
 
     /**
-    * Validate the size of an attribute is less than a maximum value.
-    *
-    * @param  mixed   $value
-    * @param  array   $parameters
-    * @return bool
-    */
+     * Validate the size of an attribute is less than a maximum value.
+     *
+     * @param  mixed   $value
+     * @param  array   $parameters
+     * @return bool
+     */
     protected function validateMax($value, $parameters)
     {
         return $this->getSize($value) <= $parameters[0];
     }
 
     /**
-    * Get the size of an attribute.
-    *
-    * @param  mixed   $value
-    * @return mixed
-    */
+     * Get the size of an attribute.
+     *
+     * @param  mixed   $value
+     * @return mixed
+     */
     protected function getSize($value)
     {
         if (is_numeric($value)) {
@@ -225,11 +258,11 @@ abstract class AbstractValidator
     }
 
     /**
-    * Get the size of a string.
-    *
-    * @param  string  $value
-    * @return int
-    */
+     * Get the size of a string.
+     *
+     * @param  string  $value
+     * @return int
+     */
     protected function getStringSize($value)
     {
         if (function_exists('mb_strlen')) {
@@ -240,34 +273,34 @@ abstract class AbstractValidator
     }
 
     /**
-    * Validate that an attribute is a valid e-mail address.
-    *
-    * @param  mixed   $value
-    * @return bool
-    */
+     * Validate that an attribute is a valid e-mail address.
+     *
+     * @param  mixed   $value
+     * @return bool
+     */
     protected function validateEmail($value)
     {
         return filter_var($value, FILTER_VALIDATE_EMAIL) !== false;
     }
 
     /**
-    * Validate that an attribute is a valid URL.
-    *
-    * @param  mixed   $value
-    * @return bool
-    */
+     * Validate that an attribute is a valid URL.
+     *
+     * @param  mixed   $value
+     * @return bool
+     */
     protected function validateUrl($value)
     {
         return filter_var($value, FILTER_VALIDATE_URL) !== false;
     }
 
     /**
-    * Validate that an attribute passes a regular expression check.
-    *
-    * @param  mixed   $value
-    * @param  array   $parameters
-    * @return bool
-    */
+     * Validate that an attribute passes a regular expression check.
+     *
+     * @param  mixed   $value
+     * @param  array   $parameters
+     * @return bool
+     */
     protected function validateRegex($value, $parameters)
     {
         return (boolean) preg_match($parameters[0], $value);

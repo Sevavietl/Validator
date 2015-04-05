@@ -7,6 +7,13 @@ class Input extends AbstractFormElement
 {
     private $type;
 
+    /**
+     * Type setter
+     *
+     * @param string $type
+     *
+     * @return object
+     */
     public function defineType($type)
     {
         $this->type = $type;
@@ -14,11 +21,21 @@ class Input extends AbstractFormElement
         return $this;
     }
 
+    /**
+     * Type getter
+     *
+     * @return string
+     */
     public function getType()
     {
         return $this->type;
     }
 
+    /**
+     * Render field
+     *
+     * @return string
+     */
     public function renderField()
     {
         $element = '<input type="' . $this->type . '"';

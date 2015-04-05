@@ -6,6 +6,11 @@ use \Validator\Abstracts\AbstractFormElement;
 
 class Button extends AbstractFormElement
 {
+    /**
+     * Render field
+     *
+     * @return string
+     */
     public function renderField()
     {
         $element = '<button';

@@ -8,11 +8,21 @@ class Select extends AbstractFormElement
 {
     private $options;
 
-    public function setOptions(Array $options)
+    /**
+     * Options setter
+     *
+     * @param array $options
+     */
+    public function setOptions(array $options)
     {
         $this->options = $options;
     }
 
+    /**
+     * Render field
+     *
+     * @return string
+     */
     public function renderField()
     {
         $value = $this->getValue();

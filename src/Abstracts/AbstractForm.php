@@ -33,6 +33,14 @@ abstract class AbstractForm
         $this->method = $method;
     }
 
+    /**
+     * Set value to element with given name
+     *
+     * @param string $name
+     * @param mixed $value
+     *
+     * @return object
+     */
     public function setElementValue($name, $value)
     {
         $this->getElementByName($name)
@@ -41,6 +49,13 @@ abstract class AbstractForm
         return $this;
     }
 
+    /**
+     * Get element by given name
+     *
+     * @param string $name
+     *
+     * @return object
+     */
     public function getElementByName($name)
     {
         if (isset($this->elements) && !empty($this->elements)) {
@@ -80,11 +95,25 @@ abstract class AbstractForm
         throw new \BadMethodCallException();
     }
 
+    /**
+     * Add element to the elements
+     *
+     * @param AbstractFormElement $element
+     */
     protected function addElement(AbstractFormElement $element)
     {
         $this->elements[] = $element;
     }
 
+    /**
+     * Add inputs to inputs
+     *
+     * @param string $type
+     * @param array $attributes
+     * @param string $label
+     *
+     * @return object
+     */
     public function addInput($type, $attributes, $label = null)
     {
         $input = new Input($attributes, $label);
@@ -96,6 +125,14 @@ abstract class AbstractForm
         return $this;
     }
 
+    /**
+     * Add textarea element
+     *
+     * @param array $attributes
+     * @param string $label
+     *
+     * @return object
+     */
     public function addTextarea($attributes, $label = null)
     {
         $textarea = new Textarea($attributes, $label);
@@ -105,6 +142,15 @@ abstract class AbstractForm
         return $this;
     }
 
+    /**
+     * Add Select element
+     *
+     * @param array $options
+     * @param array $attributes
+     * @param string $label
+     *
+     * @return object
+     */
     public function addSelect($options, $attributes, $label = null)
     {
         $select = new Select($attributes, $label);
@@ -115,6 +161,13 @@ abstract class AbstractForm
         return $this;
     }
 
+    /**
+     * Add button object
+     *
+     * @param array $attributes
+     *
+     * @return object
+     */
     public function addButton($attributes)
     {
         $button = new Button($attributes);
@@ -124,6 +177,13 @@ abstract class AbstractForm
         return $this;
     }
 
+    /**
+     * Set validator for the form
+     *
+     * @param AbstractValidator $validator [description]
+     *
+     * @return object
+     */
     public function setValidator(AbstractValidator $validator)
     {
         $this->validator = $validator;
@@ -131,6 +191,11 @@ abstract class AbstractForm
         return $this;
     }
 
+    /**
+     * Validate from elements
+     *
+     * @return boolean
+     */
     public function validate()
     {
         $this->validator->setInputs($this->elements);
@@ -138,5 +203,10 @@ abstract class AbstractForm
         return !$this->validator->fails();
     }
 
+    /**
+     * Function to render the form
+     *
+     * @return string
+     */
     abstract public function __toString();
 }

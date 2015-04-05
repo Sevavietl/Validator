@@ -18,6 +18,11 @@ abstract class AbstractFormElement
         return $this;
     }
 
+    /**
+     * Name getter
+     *
+     * @return object
+     */
     public function getName()
     {
         if (isset($this->attributes['name'])) {
@@ -27,6 +32,11 @@ abstract class AbstractFormElement
         }
     }
 
+    /**
+     * Value getter
+     *
+     * @return mixed
+     */
     public function getValue()
     {
         if (isset($this->attributes['value'])) {
@@ -36,6 +46,13 @@ abstract class AbstractFormElement
         }
     }
 
+    /**
+     * Value setter
+     *
+     * @param mixed $value
+     *
+     * @return object
+     */
     public function setValue($value)
     {
         $this->attributes['value'] = $value;
@@ -43,6 +60,13 @@ abstract class AbstractFormElement
         return $this;
     }
 
+    /**
+     * Add error
+     *
+     * @param string $error
+     *
+     * @return object
+     */
     public function addError($error)
     {
         $this->errors[] = $error;
@@ -50,11 +74,21 @@ abstract class AbstractFormElement
         return $this;
     }
 
+    /**
+     * Errors getter
+     *
+     * @return array
+     */
     public function getErrors()
     {
         return $this->errors;
     }
 
+    /**
+     * Render element label
+     *
+     * @return mixed
+     */
     public function renderLabel()
     {
         if (is_null($this->label)) {
@@ -70,5 +104,8 @@ abstract class AbstractFormElement
         return $label;
     }
 
+    /**
+     * Render field
+     */
     abstract public function renderField();
 }
