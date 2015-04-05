@@ -80,7 +80,7 @@ class InputValidatorTest extends PHPUnit_Framework_TestCase
         // Arrange
         $inputs1 = [
             'email' => 'foo@bar.baz',
-            'password' => 'quux',
+            'password' => 'quuuux',
         ];
         $inputs2 = [
             'email' => 'foo@bar',
@@ -95,8 +95,8 @@ class InputValidatorTest extends PHPUnit_Framework_TestCase
         }
 
         // Assert
-        $this->assertTrue($act1);
-        $this->assertFalse($act2);
+        $this->assertFalse($act1);
+        $this->assertTrue($act2);
     }
 
     /**
