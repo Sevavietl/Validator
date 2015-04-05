@@ -15,7 +15,7 @@ Package was written keeping in mind PSR.
 
 ##Examples
 
-###1. Create simple form for registration 
+###1. Create simple form for registration
 
 ```php
 // Stage Registration form
@@ -63,13 +63,13 @@ $registerInputValidator->setRules($rules);
 
 $registerInputValidator->setInputs($_POST);
 
-    if (! $registerInputValidator->fails()) {
-        return 'Input is valid!';
-    }
+if (! $registerInputValidator->fails()) {
+    return 'Input is valid!';
+}
 
-    foreach ($registerInputValidator->getAllMessages() as $messages) {
-        foreach ($messages as $message) {
-            echo '<div class="alert alert-danger">', $message, '</div>';
-        }
+foreach ($registerInputValidator->getAllMessages() as $messages) {
+    foreach ($messages as $message) {
+        echo '<div class="alert alert-danger">', $message, '</div>';
     }
+}
 ```
